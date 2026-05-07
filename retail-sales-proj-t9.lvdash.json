@@ -1,0 +1,643 @@
+{
+  "datasets": [
+    {
+      "name": "37065e7a",
+      "displayName": "Untitled dataset",
+      "queryLines": [
+        "USE CATALOG `workspace`;\n",
+        "USE SCHEMA `default`;\n",
+        "\n",
+        "SELECT\n",
+        "    COUNT(*) AS total_active_customers\n",
+        "FROM `retail-sales-proj-t9`.gold.dim_customer\n",
+        "WHERE is_active = 1;"
+      ]
+    },
+    {
+      "name": "dae0ff66",
+      "displayName": "Untitled dataset",
+      "queryLines": [
+        "USE CATALOG `workspace`;\n",
+        "USE SCHEMA `default`;\n",
+        "\n",
+        "SELECT\n",
+        "    COUNT(*) AS total_products\n",
+        "FROM  `retail-sales-proj-t9`.gold.dim_product;"
+      ]
+    },
+    {
+      "name": "5ac46d5c",
+      "displayName": "Untitled dataset",
+      "queryLines": [
+        "USE CATALOG `workspace`;\n",
+        "USE SCHEMA `default`;\n",
+        "\n",
+        "SELECT\n",
+        "    COUNT(*) AS total_stores\n",
+        "FROM  `retail-sales-proj-t9`.gold.dim_store;"
+      ]
+    },
+    {
+      "name": "4e8b6525",
+      "displayName": "Untitled dataset",
+      "queryLines": [
+        "USE CATALOG `workspace`;\n",
+        "USE SCHEMA `default`;\n",
+        "\n",
+        "SELECT\n",
+        "    SUM(quantity) AS total_sales_quantity\n",
+        "FROM  `retail-sales-proj-t9`.gold.fact_sales;"
+      ]
+    },
+    {
+      "name": "afe72081",
+      "displayName": "Untitled dataset",
+      "queryLines": [
+        "USE CATALOG `workspace`;\n",
+        "USE SCHEMA `default`;\n",
+        "\n",
+        "SELECT\n",
+        "\n",
+        "    s.region,\n",
+        "    SUM(f.quantity) AS total_sales\n",
+        "\n",
+        "FROM  `retail-sales-proj-t9`.gold.fact_sales f\n",
+        "\n",
+        "JOIN  `retail-sales-proj-t9`.gold.dim_store s\n",
+        "\n",
+        "ON f.store_id = s.store_id\n",
+        "\n",
+        "GROUP BY s.region\n",
+        "\n",
+        "ORDER BY total_sales DESC;"
+      ]
+    },
+    {
+      "name": "856f8d66",
+      "displayName": "Untitled dataset",
+      "queryLines": [
+        "USE CATALOG `workspace`;\n",
+        "USE SCHEMA `default`;\n",
+        "\n",
+        "SELECT\n",
+        "\n",
+        "    p.product_name,\n",
+        "    SUM(f.quantity) AS total_sales\n",
+        "\n",
+        "FROM  `retail-sales-proj-t9`.gold.fact_sales f\n",
+        "\n",
+        "JOIN  `retail-sales-proj-t9`.gold.dim_product p\n",
+        "\n",
+        "ON f.product_id = p.product_id\n",
+        "\n",
+        "GROUP BY p.product_name\n",
+        "\n",
+        "ORDER BY total_sales DESC\n",
+        "\n",
+        "LIMIT 10;"
+      ]
+    },
+    {
+      "name": "7de42eed",
+      "displayName": "Untitled dataset",
+      "queryLines": [
+        "USE CATALOG `workspace`;\n",
+        "USE SCHEMA `default`;\n",
+        "\n",
+        "SELECT\n",
+        "\n",
+        "    s.region,\n",
+        "    SUM(f.quantity) AS total_sales\n",
+        "\n",
+        "FROM  `retail-sales-proj-t9`.gold.fact_sales f\n",
+        "\n",
+        "JOIN  `retail-sales-proj-t9`.gold.dim_store s\n",
+        "\n",
+        "ON f.store_id = s.store_id\n",
+        "\n",
+        "GROUP BY s.region\n",
+        "\n",
+        "ORDER BY total_sales DESC;"
+      ]
+    },
+    {
+      "name": "09fcb345",
+      "displayName": "Untitled dataset",
+      "queryLines": [
+        "USE CATALOG `workspace`;\n",
+        "USE SCHEMA `default`;\n",
+        "\n",
+        "SELECT\n",
+        "\n",
+        "    s.region,\n",
+        "    SUM(f.quantity) AS total_sales\n",
+        "\n",
+        "FROM  `retail-sales-proj-t9`.gold.fact_sales f\n",
+        "\n",
+        "JOIN  `retail-sales-proj-t9`.gold.dim_store s\n",
+        "\n",
+        "ON f.store_id = s.store_id\n",
+        "\n",
+        "GROUP BY s.region\n",
+        "\n",
+        "ORDER BY total_sales DESC;"
+      ]
+    },
+    {
+      "name": "da920023",
+      "displayName": "Untitled dataset",
+      "queryLines": [
+        "USE CATALOG `workspace`;\n",
+        "USE SCHEMA `default`;\n",
+        "\n",
+        "SELECT\n",
+        "\n",
+        "    transaction_date,\n",
+        "    SUM(quantity) AS total_sales\n",
+        "\n",
+        "FROM  `retail-sales-proj-t9`.gold.fact_sales\n",
+        "\n",
+        "GROUP BY transaction_date\n",
+        "\n",
+        "ORDER BY transaction_date;"
+      ]
+    },
+    {
+      "name": "ea350036",
+      "displayName": "Untitled dataset",
+      "queryLines": [
+        "USE CATALOG `workspace`;\n",
+        "USE SCHEMA `default`;\n",
+        "\n",
+        "SELECT\n",
+        "\n",
+        "    layer_name,\n",
+        "    table_name,\n",
+        "    process_status,\n",
+        "    records_processed,\n",
+        "    created_at\n",
+        "\n",
+        "FROM  `retail-sales-proj-t9`.logging.etl_log\n",
+        "\n",
+        "ORDER BY created_at DESC;"
+      ]
+    },
+    {
+      "name": "7606ccd3",
+      "displayName": "Untitled dataset",
+      "queryLines": [
+        "USE CATALOG `workspace`;\n",
+        "USE SCHEMA `default`;\n",
+        "\n",
+        "SELECT\n",
+        "\n",
+        "    validation_type,\n",
+        "    validation_status,\n",
+        "    failed_records,\n",
+        "    validation_time\n",
+        "\n",
+        "FROM  `retail-sales-proj-t9`.validation.validation_report\n",
+        "\n",
+        "ORDER BY validation_time DESC;"
+      ]
+    }
+  ],
+  "pages": [
+    {
+      "name": "f7eaf879",
+      "displayName": "retail-sales-proj-t9",
+      "layout": [
+        {
+          "widget": {
+            "name": "89fcef52",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "37065e7a",
+                  "fields": [
+                    {
+                      "name": "total_active_customers",
+                      "expression": "`total_active_customers`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "showTitle": true,
+                "showDescription": true,
+                "title": "Total Active Customers"
+              },
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "total_active_customers",
+                  "format": {
+                    "type": "number-plain",
+                    "abbreviation": "none",
+                    "decimalPlaces": {
+                      "type": "exact",
+                      "places": 0
+                    }
+                  },
+                  "rowNumber": 1
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 2,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "43ce78ea",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "dae0ff66",
+                  "fields": [
+                    {
+                      "name": "total_products",
+                      "expression": "`total_products`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "showTitle": true,
+                "showDescription": true,
+                "title": "Total Products"
+              },
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "total_products",
+                  "format": {
+                    "type": "number-plain",
+                    "abbreviation": "none",
+                    "decimalPlaces": {
+                      "type": "exact",
+                      "places": 0
+                    }
+                  },
+                  "rowNumber": 1
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 3,
+            "y": 0,
+            "width": 2,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "1e2a75b6",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "5ac46d5c",
+                  "fields": [
+                    {
+                      "name": "total_stores",
+                      "expression": "`total_stores`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "showTitle": true,
+                "showDescription": true,
+                "title": "Total Stores"
+              },
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "total_stores",
+                  "format": {
+                    "type": "number-plain",
+                    "abbreviation": "none",
+                    "decimalPlaces": {
+                      "type": "exact",
+                      "places": 0
+                    }
+                  },
+                  "rowNumber": 1
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 0,
+            "width": 2,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "1c5a1487",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "4e8b6525",
+                  "fields": [
+                    {
+                      "name": "total_sales_quantity",
+                      "expression": "`total_sales_quantity`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "showTitle": true,
+                "showDescription": true,
+                "title": "Total Sales"
+              },
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "total_sales_quantity",
+                  "format": {
+                    "type": "number-plain",
+                    "abbreviation": "none",
+                    "decimalPlaces": {
+                      "type": "exact",
+                      "places": 0
+                    }
+                  },
+                  "rowNumber": 1
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 9,
+            "y": 0,
+            "width": 2,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "f122dd58",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "856f8d66",
+                  "fields": [
+                    {
+                      "name": "sum(total_sales)",
+                      "expression": "SUM(`total_sales`)"
+                    },
+                    {
+                      "name": "product_name",
+                      "expression": "`product_name`"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "frame": {
+                "title": "Top Products",
+                "showTitle": true
+              },
+              "mark": {
+                "layout": "group"
+              },
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "sum(total_sales)",
+                  "displayName": "total_sales",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "y": {
+                  "fieldName": "product_name",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 2,
+            "width": 5,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "b7507fdf",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "09fcb345",
+                  "fields": [
+                    {
+                      "name": "region",
+                      "expression": "`region`"
+                    },
+                    {
+                      "name": "count(total_sales)",
+                      "expression": "COUNT(`total_sales`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "frame": {
+                "title": "Region - Wise Sales",
+                "showTitle": true
+              },
+              "mark": {
+                "layout": "group"
+              },
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "region",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "y": {
+                  "fieldName": "count(total_sales)",
+                  "displayName": "total_sales",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 2,
+            "width": 5,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "8ac43621",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "da920023",
+                  "fields": [
+                    {
+                      "name": "transaction_date",
+                      "expression": "`transaction_date`"
+                    },
+                    {
+                      "name": "sum(total_sales)",
+                      "expression": "SUM(`total_sales`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "frame": {
+                "title": "Daily Sales Trend",
+                "showTitle": true
+              },
+              "mark": {
+                "layout": "layer"
+              },
+              "widgetType": "line",
+              "encodings": {
+                "x": {
+                  "fieldName": "transaction_date",
+                  "scale": {
+                    "type": "temporal"
+                  }
+                },
+                "y": {
+                  "fieldName": "sum(total_sales)",
+                  "displayName": "total_sales",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 8,
+            "width": 5,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "4538df25",
+            "queries": [
+              {
+                "name": "4f94a332f8a54642861665b71dfebb72",
+                "query": {
+                  "datasetName": "ea350036",
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 0,
+              "viz_spec": {
+                "display_name": "ETL Log Table",
+                "viz_type": "TABLE",
+                "serialized_options": "{\"paginationSize\":\"default\",\"version\":2,\"withRowNumber\":false,\"columns\":[{\"imageUrlTemplate\":\"{{ @ }}\",\"useMonospaceFont\":false,\"name\":\"layer_name\",\"linkTextTemplate\":\"{{ @ }}\",\"visible\":true,\"allowHTML\":false,\"alignContent\":\"left\",\"linkTitleTemplate\":\"{{ @ }}\",\"allowSearch\":false,\"imageWidth\":\"\",\"booleanValues\":[\"false\",\"true\"],\"linkOpenInNewTab\":true,\"imageTitleTemplate\":\"{{ @ }}\",\"order\":100000,\"title\":\"layer_name\",\"type\":\"string\",\"highlightLinks\":false,\"linkUrlTemplate\":\"{{ @ }}\",\"preserveWhitespace\":false,\"imageHeight\":\"\",\"displayAs\":\"string\"},{\"imageUrlTemplate\":\"{{ @ }}\",\"useMonospaceFont\":false,\"name\":\"table_name\",\"linkTextTemplate\":\"{{ @ }}\",\"visible\":true,\"allowHTML\":false,\"alignContent\":\"left\",\"linkTitleTemplate\":\"{{ @ }}\",\"allowSearch\":false,\"imageWidth\":\"\",\"booleanValues\":[\"false\",\"true\"],\"linkOpenInNewTab\":true,\"imageTitleTemplate\":\"{{ @ }}\",\"order\":100001,\"title\":\"table_name\",\"type\":\"string\",\"highlightLinks\":false,\"linkUrlTemplate\":\"{{ @ }}\",\"preserveWhitespace\":false,\"imageHeight\":\"\",\"displayAs\":\"string\"},{\"imageUrlTemplate\":\"{{ @ }}\",\"useMonospaceFont\":false,\"name\":\"process_status\",\"linkTextTemplate\":\"{{ @ }}\",\"visible\":true,\"allowHTML\":false,\"alignContent\":\"left\",\"linkTitleTemplate\":\"{{ @ }}\",\"allowSearch\":false,\"imageWidth\":\"\",\"booleanValues\":[\"false\",\"true\"],\"linkOpenInNewTab\":true,\"imageTitleTemplate\":\"{{ @ }}\",\"order\":100002,\"title\":\"process_status\",\"type\":\"string\",\"highlightLinks\":false,\"linkUrlTemplate\":\"{{ @ }}\",\"preserveWhitespace\":false,\"imageHeight\":\"\",\"displayAs\":\"string\"},{\"imageUrlTemplate\":\"{{ @ }}\",\"useMonospaceFont\":false,\"name\":\"records_processed\",\"linkTextTemplate\":\"{{ @ }}\",\"visible\":true,\"allowHTML\":false,\"alignContent\":\"right\",\"linkTitleTemplate\":\"{{ @ }}\",\"allowSearch\":false,\"imageWidth\":\"\",\"booleanValues\":[\"false\",\"true\"],\"linkOpenInNewTab\":true,\"imageTitleTemplate\":\"{{ @ }}\",\"order\":100003,\"title\":\"records_processed\",\"type\":\"integer\",\"highlightLinks\":false,\"linkUrlTemplate\":\"{{ @ }}\",\"preserveWhitespace\":false,\"numberFormat\":\"0\",\"imageHeight\":\"\",\"displayAs\":\"number\"},{\"imageUrlTemplate\":\"{{ @ }}\",\"useMonospaceFont\":false,\"name\":\"created_at\",\"linkTextTemplate\":\"{{ @ }}\",\"visible\":true,\"allowHTML\":false,\"alignContent\":\"right\",\"linkTitleTemplate\":\"{{ @ }}\",\"allowSearch\":false,\"imageWidth\":\"\",\"booleanValues\":[\"false\",\"true\"],\"linkOpenInNewTab\":true,\"imageTitleTemplate\":\"{{ @ }}\",\"order\":100004,\"title\":\"created_at\",\"type\":\"datetime\",\"highlightLinks\":false,\"linkUrlTemplate\":\"{{ @ }}\",\"preserveWhitespace\":false,\"dateTimeFormat\":\"DD/MM/YYYY HH:mm:ss.SSS\",\"imageHeight\":\"\",\"displayAs\":\"datetime\"}],\"condensed\":true,\"itemsPerPage\":25}",
+                "query_name": "4f94a332f8a54642861665b71dfebb72"
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 8,
+            "width": 5,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "c720be99",
+            "queries": [
+              {
+                "name": "a84580f7110a4d7eb0ec302cf84d954b",
+                "query": {
+                  "datasetName": "7606ccd3",
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 0,
+              "viz_spec": {
+                "display_name": "Validation Report Table",
+                "viz_type": "TABLE",
+                "serialized_options": "{\"paginationSize\":\"default\",\"version\":2,\"withRowNumber\":false,\"columns\":[{\"imageUrlTemplate\":\"{{ @ }}\",\"useMonospaceFont\":false,\"name\":\"validation_type\",\"linkTextTemplate\":\"{{ @ }}\",\"visible\":true,\"allowHTML\":false,\"alignContent\":\"left\",\"linkTitleTemplate\":\"{{ @ }}\",\"allowSearch\":false,\"imageWidth\":\"\",\"booleanValues\":[\"false\",\"true\"],\"linkOpenInNewTab\":true,\"imageTitleTemplate\":\"{{ @ }}\",\"order\":100000,\"title\":\"validation_type\",\"type\":\"string\",\"highlightLinks\":false,\"linkUrlTemplate\":\"{{ @ }}\",\"preserveWhitespace\":false,\"imageHeight\":\"\",\"displayAs\":\"string\"},{\"imageUrlTemplate\":\"{{ @ }}\",\"useMonospaceFont\":false,\"name\":\"validation_status\",\"linkTextTemplate\":\"{{ @ }}\",\"visible\":true,\"allowHTML\":false,\"alignContent\":\"left\",\"linkTitleTemplate\":\"{{ @ }}\",\"allowSearch\":false,\"imageWidth\":\"\",\"booleanValues\":[\"false\",\"true\"],\"linkOpenInNewTab\":true,\"imageTitleTemplate\":\"{{ @ }}\",\"order\":100001,\"title\":\"validation_status\",\"type\":\"string\",\"highlightLinks\":false,\"linkUrlTemplate\":\"{{ @ }}\",\"preserveWhitespace\":false,\"imageHeight\":\"\",\"displayAs\":\"string\"},{\"imageUrlTemplate\":\"{{ @ }}\",\"useMonospaceFont\":false,\"name\":\"failed_records\",\"linkTextTemplate\":\"{{ @ }}\",\"visible\":true,\"allowHTML\":false,\"alignContent\":\"right\",\"linkTitleTemplate\":\"{{ @ }}\",\"allowSearch\":false,\"imageWidth\":\"\",\"booleanValues\":[\"false\",\"true\"],\"linkOpenInNewTab\":true,\"imageTitleTemplate\":\"{{ @ }}\",\"order\":100002,\"title\":\"failed_records\",\"type\":\"integer\",\"highlightLinks\":false,\"linkUrlTemplate\":\"{{ @ }}\",\"preserveWhitespace\":false,\"numberFormat\":\"0\",\"imageHeight\":\"\",\"displayAs\":\"number\"},{\"imageUrlTemplate\":\"{{ @ }}\",\"useMonospaceFont\":false,\"name\":\"validation_time\",\"linkTextTemplate\":\"{{ @ }}\",\"visible\":true,\"allowHTML\":false,\"alignContent\":\"right\",\"linkTitleTemplate\":\"{{ @ }}\",\"allowSearch\":false,\"imageWidth\":\"\",\"booleanValues\":[\"false\",\"true\"],\"linkOpenInNewTab\":true,\"imageTitleTemplate\":\"{{ @ }}\",\"order\":100003,\"title\":\"validation_time\",\"type\":\"datetime\",\"highlightLinks\":false,\"linkUrlTemplate\":\"{{ @ }}\",\"preserveWhitespace\":false,\"dateTimeFormat\":\"DD/MM/YYYY HH:mm:ss.SSS\",\"imageHeight\":\"\",\"displayAs\":\"datetime\"}],\"condensed\":true,\"itemsPerPage\":25}",
+                "query_name": "a84580f7110a4d7eb0ec302cf84d954b"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 14,
+            "width": 5,
+            "height": 6
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS",
+      "layoutVersion": "GRID_V1"
+    }
+  ],
+  "uiSettings": {
+    "theme": {
+      "widgetHeaderAlignment": "ALIGNMENT_UNSPECIFIED"
+    },
+    "applyModeEnabled": false
+  }
+}
