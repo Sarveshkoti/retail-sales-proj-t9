@@ -137,6 +137,27 @@ The Gold layer contains analytical business-ready tables following dimensional m
 - optimized query structure
 
 ---
+# 4. Anomaly Detection Framework
+
+An enterprise-style anomaly detection framework was implemented in the Gold layer to identify unusual sales transactions and abnormal business patterns.
+
+### Features Implemented
+
+- statistical anomaly detection
+- quantity spike analysis
+- anomaly alert generation
+- anomaly monitoring dashboard
+- governed reporting layer
+
+### Detection Logic
+
+The framework identifies abnormal sales transactions using statistical thresholding.
+
+```text
+quantity > AVG(quantity) + 2 * STDDEV(quantity)
+```
+
+---
 
 # Incremental Load Framework
 
@@ -268,6 +289,8 @@ Silver Layer
       ↓
 Gold Layer
       ↓
+Anomaly Detection
+      ↓
 ETL Logging
       ↓
 Validation Reports
@@ -292,6 +315,7 @@ An interactive Databricks SQL Dashboard was developed to provide business insigh
 - total active customers
 - total products
 - total stores
+- anomaly detection KPI
 - sales trend analysis
 - region-wise sales
 - top-performing products
@@ -327,6 +351,9 @@ The project successfully demonstrates:
 - workflow orchestration
 - business reporting
 - data quality management
+- intelligent anomaly monitoring
+- operational alert generation
+- governed analytical reporting
 
 ---
 
@@ -360,6 +387,10 @@ Potential future improvements include:
 
 ✅ Cloud-Based Lakehouse Architecture
 
+✅ Statistical Anomaly Detection
+
+✅ Alert-Based Monitoring Framework
+
 ---
 
 # Conclusion
@@ -387,5 +418,5 @@ The architecture aligns with modern industry standards for scalable Lakehouse-ba
 
 Enterprise Data Engineering Project
 
-AWS S3 | Databricks | Delta Lake | SQL | PySpark
+AWS S3 | Databricks | Delta Lake | SQL 
 
